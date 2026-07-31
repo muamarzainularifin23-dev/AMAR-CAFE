@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kafe Kita - Cozy & Delicious</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Navigasi -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-brand">☕ Kafe Kita</div>
+        <div class="nav-links" id="navLinks">
+            <a href="#" class="nav-link active" data-page="home">Beranda</a>
+            <a href="#" class="nav-link" data-page="menu">Menu</a>
+            <a href="#" class="nav-link cart-link" data-page="cart">
+                Keranjang <span class="cart-badge" id="cartBadge">0</span>
+            </a>
+            <a href="#" class="nav-link" data-page="orders">Riwayat</a>
+        </div>
+        <div class="hamburger" id="hamburger">&#9776;</div>
+    </nav>
+
+    <!-- Konten Halaman -->
+    <main id="app">
+        <!-- Beranda -->
+        <section id="home-page" class="page active">
+            <div class="hero">
+                <div class="hero-overlay">
+                    <h1>Selamat Datang di Kafe Kita</h1>
+                    <p>Tempat nyaman untuk kopi, teh, dan obrolan hangat</p>
+                </div>
+            </div>
+            <div class="container">
+                <div class="info-section">
+                    <div class="info-card">
+                        <h2>🕒 Jam Operasional</h2>
+                        <p>Senin - Jumat: 08:00 - 22:00</p>
+                        <p>Sabtu - Minggu: 07:00 - 23:00</p>
+                    </div>
+                    <div class="info-card">
+                        <h2>📍 Lokasi</h2>
+                        <p>Jl. Kopi Nikmat No. 42, Jakarta</p>
+                        <div class="map-container">
+                            <iframe src="https://maps.google.com/maps?q=Jl.%20Kopi%20Nikmat%20No.%2042%20Jakarta&t=&z=15&ie=UTF8&iwloc=&output=embed" 
+                                    width="100%" height="200" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                        </div>
+                    </div>
+                </div>
+                <div class="gallery">
+                    <h2>Suasana Kafe</h2>
+                    <div class="gallery-grid">
+                        <img src="https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Suasana 1">
+                        <img src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Suasana 2">
+                        <img src="https://images.unsplash.com/photo-1445116572660-236099ec97a0?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Suasana 3">
+                        <img src="https://images.unsplash.com/photo-1521017432531-fbd92d768814?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Suasana 4">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Halaman Menu -->
+        <section id="menu-page" class="page">
+            <div class="container">
+                <h2 class="page-title">Menu Kami</h2>
+                <button id="mysteryBtn" class="btn-mystery">🎁 Pesan Kejutan (Mystery Drink)</button>
+                <div class="menu-grid" id="menuGrid"></div>
+            </div>
+        </section>
+
+        <!-- Halaman Keranjang -->
+        <section id="cart-page" class="page">
+            <div class="container">
+                <h2 class="page-title">Keranjang Belanja</h2>
+                <div id="cartItems"></div>
+                <div class="cart-total" id="cartTotal"></div>
+                <button id="checkoutBtn" class="btn-primary" disabled>Pesan Sekarang</button>
+            </div>
+        </section>
+
+        <!-- Halaman Checkout -->
+        <section id="checkout-page" class="page">
+            <div class="container">
+                <h2 class="page-title">Checkout</h2>
+                <form id="checkoutForm">
+                    <label>Nama Pemesan</label>
+                    <input type="text" id="custName" required>
+                    <label>Jenis Pesanan</label>
+                    <select id="orderType" required>
+                        <option value="dine-in">Dine-in (Makan di Tempat)</option>
+                        <option value="takeaway">Takeaway (Bungkus)</option>
+                    </select>
+                    <div id="dineInField">
+                        <label>Nomor Meja</label>
+                        <input type="number" id="tableNumber" min="1">
+                    </div>
+                    <div id="takeawayField" style="display:none;">
+                        <label>Alamat Pengiriman</label>
+                        <textarea id="address" rows="2"></textarea>
+                    </div>
+                    <label>Catatan Khusus</label>
+                    <textarea id="notes" rows="2"></textarea>
+                    <button type="submit" class="btn-primary">Konfirmasi Pesanan</button>
+                </form>
+            </div>
+        </section>
+
+        <!-- Halaman Konfirmasi -->
+        <section id="confirmation-page" class="page">
+            <div class="container">
+                <h2 class="page-title">✅ Pesanan Dikonfirmasi</h2>
+                <div id="confirmationDetails"></div>
+                <p>Estimasi penyajian: <strong>10-15 menit</strong></p>
+                <button id="backToMenuBtn" class="btn-secondary">Kembali ke Menu</button>
+            </div>
+        </section>
+
+        <!-- Halaman Riwayat Pesanan -->
+        <section id="orders-page" class="page">
+            <div class="container">
+                <h2 class="page-title">Riwayat Pesanan</h2>
+                <div id="ordersList"></div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Modal Spin Wheel -->
+    <div id="spinModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" id="closeSpin">&times;</span>
+            <h2>🎡 Mystery Drink</h2>
+            <canvas id="wheelCanvas" width="300" height="300"></canvas>
+            <button id="spinBtn" class="btn-primary">Putar Roda</button>
+            <p id="spinResult"></p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
